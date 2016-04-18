@@ -53,3 +53,25 @@ function nth(list, index) {
 }
 
 //recursive version of nth.
+function arrayToList(array) {
+  var cell = {};
+  cell.value = array[0];
+  array.shift();
+  if (array.length == 0) {
+   cell.rest = null;
+  } else {
+    cell.rest = arrayToList(array);
+  }
+  return cell;
+}
+
+function nth(cell, index) {
+  if (cell.rest == null && index != 0) {
+    return undefined;
+  } else if (index == 0) {
+    return cell.value;
+  } else {
+    index--;
+    return nth(cell.rest, index);
+  }
+}
